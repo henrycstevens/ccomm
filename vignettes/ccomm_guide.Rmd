@@ -1,0 +1,60 @@
+---
+title: "ccomm - Visualize your ecological community"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ccomm_guide}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(ccomm)
+```
+
+## The 'vegan' package offers an array of useful statistical tools for the analysis of ecological data. However, the process of manipulating your raw data and performing intermediate calculations can be tedious. Here, I include 3 functions that expedite this process.
+
+```{r}
+?givemeDIVERSITY
+?givemeNMDS
+?givemeTREE
+```
+
+## Let's start with givemeDIVERSITY. Many ecologists are interested in the differences in communities between sampling sites. A useful way to determine differences is by calculating alpha (total species richness) and beta (turnover in species) for/between sites. Let's use the example dataset 'community' as input in the function so we can get estimates for the alpha and beta diversity at these sites. 
+
+```{r}
+givemeDIVERSITY(community)
+```
+
+## The function returns a rarefied boxplot for alpha diversity using the lowest total abundance of all the sites (which is why there is no boxplot for the last site), and estimates for total beta diversity between sites as well as the relative contributions of replacement and richness in determing beta diversity. Now we know the differences, yay!
+
+##For multivariate analysis of community data, ecologists can use non-metric dimensional scaling. This allows you to relate many sites containing abundance/incidence data for potentially hundreds of species by generating a separate axis for every species at each site and compressing it down to two dimensions for easy visualization. This approach is non-parametric, allowing species abundance/incidence data to violate normality (which it often does). Usually, ecologists are interested in visualizing the differences between two different types of sites in their NMDS plot. You can use additional functions in 'vegan' to further customize your NMDS plot such as "orditorp" and "ordihull". For example, say one group of sites has Treatment 1 (like dry habitat) and another group of sites has Treatment 2 (wet habitat). Let's say I'm interested in seeing if sites with the same treatment are more closely related than sites with the other treatment. With a few lines of code, we can easily visualize this on the NMDS plot. We can use the 'community' example data as input for this function as well.
+
+```{r}
+NMDS <- givemeNMDS(community)
+
+treat=c(rep("Treatment1",4),rep("Treatment2",3))
+ordihull(NMDS, groups = treat, display = "sites", draw = "polygon", col="grey90")
+orditorp(NMDS,display="sites",col=c(rep("red",4),rep("blue",3)), cex = 1, air=2)
+
+```
+
+##Pretty cool, right? We can see clearly that the communities at the different types of sites are completely different from each other. This makes sense given the high beta diversity values we got from 'givemeDIVERSITY' -- if there is high turnover between sites, we'd expect that the communities differ greatly from one another. Thanks to the NMDS, we now know that the greatest turnover is between sites with different treatments. 
+
+##Let's switch gears from the "community" dataset and consider another way to represent a community -- functional diversity. This refers to the number of different niches a given community fills based on their life history traits. In a community with less functional diversity, you'd expect many species to share life history traits, whereas in a more functionally diverse community you'd expect life history traits to not be preserved across species. Luckily, we can visualize the relationships between species based on their functional traits using cluster analysis. This type of analysis requires a trait dataset, where species are the rows and functional traits are the columns. The function 'givemeTREE' performs this cluster analysis and plots a dendrogram relating species based on their functional traits. Let's try it out with the example data "traits".
+
+```{r}
+givemeTREE(traits)
+```
+##Interesting -- we now start to see how this fake community is organized. The biggest family cluster in the middle of the dendrogram all appear to be insectivores that forage in low parts of the forest. Next to them are the only two carnivores that forage in low parts of the forest. As we move farther away from this functional group, we see a cluster of hummingbirds, etc., etc.
+
+```{r}
+
+```
+

@@ -6,6 +6,8 @@
 #' and (2) pairwise estimates for beta diversity across sites and overall
 #' beta diversity for all sites (including relative contributions of 
 #' richness and replacement in determining overall beta).
+#' 
+#' @export givemeDIVERSITY
 
 givemeDIVERSITY <- function(community) {
   
