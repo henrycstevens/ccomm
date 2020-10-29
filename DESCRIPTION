@@ -1,13 +1,15 @@
 Package: ccomm
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Analyze and visualize ecological community datasets
+Version: 0.1
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Henry",
+           family = "Stevens",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+           email = "henrycstevens@gmail.com",
+           comment = c(ORCID = "0000-0002-3934-2572"))
+Description: Use this package to expedite the process of analyzing
+        ecological datasets with 'vegan' and visualizing the results.
+Imports: vegan
 License: `use_mit_license()`, `use_gpl3_license()` or friends to
     pick a license
 Encoding: UTF-8

@@ -21,7 +21,6 @@ givemeDIVERSITY <- function(community) {
           (boxwex = 0.8, staplewex = 0, outwex = 0.5), range=1.5,
           lwd=0.8, lty=1, ylab = expression(alpha))
   
-  beta(community)
   beta.multi(community)
 }
 
