@@ -8,9 +8,9 @@
 #' nearly zero -- this is usually occurs with datasets that have lots of
 #' 0 values, which is typically expected in large community datasets. 
 #' 
-#' @export givemeNMDS
+#' @export givemeSTRESS
 
-givemeNMDS <- function(community) {
+givemeSTRESS <- function(community) {
   
   library(vegan)
   

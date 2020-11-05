@@ -2,4 +2,5 @@
 
 export(givemeDIVERSITY)
 export(givemeNMDS)
+export(givemeSTRESS)
 export(givemeTREE)
